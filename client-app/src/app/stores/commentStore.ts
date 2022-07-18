@@ -10,7 +10,7 @@ export default class CommentStore {
     constructor() {
         makeAutoObservable(this);
     }
-    
+
     createHubConnection = (activityId: string) => {
         if (store.activityStore.selectedActivity) {
             this.hubConnection = new HubConnectionBuilder()
@@ -20,15 +20,23 @@ export default class CommentStore {
                 .withAutomaticReconnect()
                 .configureLogging(LogLevel.Information)
                 .build();
-            
+
             this.hubConnection.start().catch(error => console.log('Error establishing the connection: ', error));
 
             this.hubConnection.on('LoadComments', (comments: ChatComment[]) => {
-                runInAction(() => this.comments = comments);
+                runInAction(() => {
+                    comments.forEach(comment => {
+                        comment.createdAt = new Date(comment.createdAt + 'Z');
+                    })
+                    this.comments = comments
+                });
             })
 
             this.hubConnection.on('ReceiveComment', (comment: ChatComment) => {
-                runInAction(() => this.comments.push(comment));
+                runInAction(() => {
+                    comment.createdAt = new Date(comment.createdAt);
+                    this.comments.unshift(comment)
+                });
             })
         }
     }
