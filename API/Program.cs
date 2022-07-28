@@ -17,6 +17,9 @@ namespace API
     {
         public static async Task Main(string[] args)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
             var host = CreateHostBuilder(args).Build();
 
             using var scope = host.Services.CreateScope();
