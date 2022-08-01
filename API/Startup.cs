@@ -70,7 +70,7 @@ namespace API
                 .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
                 .FormActions(s => s.Self())
                 .FrameAncestors(s => s.Self())
-                .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com", "data:"))
+                .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com", "blob:", "data:"))
                 .ScriptSources(s => s.Self().CustomSources("sha256-vpD4kayiUYOTFvnTWYCDknM5I3Nd2XUzIKx9+q6BNu0=",
                     "sha256-Tui7QoFlnLXkJCSl1/JvEZdIXTmBttnWNxzJpXomQjg="))
             );
