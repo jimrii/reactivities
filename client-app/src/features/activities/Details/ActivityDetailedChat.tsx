@@ -29,7 +29,7 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
                 textAlign='center'
                 attached='top'
                 inverted
-                color='teal'
+                color='red'
                 style={{ border: 'none' }}
             >
                 <Header>Chat about this event</Header>
